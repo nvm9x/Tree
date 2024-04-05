@@ -8,8 +8,9 @@ import java.util.Scanner;
 
 public class Find {
 
-    public static void main(String[] args) {
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory("main");
+
+    public static void find(){
+        EntityManagerFactory factory = CentralFactory.createManager();
         EntityManager manager = factory.createEntityManager();
         // Введите название категории: Процессоры
 
@@ -51,11 +52,6 @@ public class Find {
         //
         //
         //
-
-
-
-
-
 
         List<Category> listc= categoryTypedQuery1.getResultList();
 

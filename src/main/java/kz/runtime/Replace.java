@@ -9,7 +9,9 @@ import kz.runtime.entity.Category;
 import java.util.Scanner;
 
 public class Replace {
-    public static void main(String[] args) {
+
+
+    public static void move(){
         EntityManagerFactory factory = Persistence.createEntityManagerFactory("main");
         EntityManager manager = factory.createEntityManager();
 
@@ -23,6 +25,7 @@ public class Replace {
             Category category = manager.find(Category.class, id);
             Long left = category.getLeft_key();
             Long right = category.getRight_key();
+            Long level1= category.getLevel();
 
             //Поменяли узлы категории которую хотим перенести на отрицательный знак чтобы изолировать
 
@@ -94,6 +97,21 @@ public class Replace {
 //            levelQuery.setParameter(1, level);
 //            levelQuery.setParameter(2, id);
 //            levelQuery.executeUpdate();
+
+            Query query1 = manager.createQuery("update Category c set c.level = c.level+(?1-?2)+1 where c.left_key<0");
+            query1.setParameter(1,level);
+            query1.setParameter(2,level1);
+            query1.executeUpdate();
+
+            Query query2 = manager.createQuery("update Category c set c.left_key = (c.left_key*-1)+(?1-?2)+1 where c.left_key<0");
+            query2.setParameter(1,left1);
+            query2.setParameter(2,left);
+            query2.executeUpdate();
+
+            Query query3 = manager.createQuery("update Category c set c.right_key = (c.right_key*-1)+(?1-?2)+1 where c.right_key<0");
+            query2.setParameter(1,left1);
+            query2.setParameter(2,left);
+            query2.executeUpdate();
 
 
             manager.getTransaction().commit();

@@ -7,12 +7,15 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Create {
-    public static  void main(String[] args) {
+
+
+    public static void createCategory(){
 
         //Создать новую категорию в уже имеющейся типа в процессорах добавить третий подвид
         // сначала задача точно так же найти категорию
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory("main");
+        EntityManagerFactory factory = CentralFactory.createManager();
         EntityManager manager = factory.createEntityManager();
+
 
         // update Category c set c.left = c.left + 2 where c.left > ?1
 

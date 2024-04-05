@@ -6,8 +6,10 @@ import kz.runtime.entity.Category;
 import java.util.List;
 
 public class DeleteCategoryQuery {
-    public static void main(String[] args) {
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory("main");
+
+
+    public static void deleteCategory(){
+        EntityManagerFactory factory = CentralFactory.createManager();
         EntityManager manager = factory.createEntityManager();
 
         try{
